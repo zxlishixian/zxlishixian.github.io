@@ -1,1 +1,141 @@
-# zxlishixian.github.io
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简介 - zxlishixian</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f7f9fa;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 40px 32px 32px 32px;
+        }
+        h1, h2 {
+            color: #2d6cdf;
+            margin-bottom: 8px;
+        }
+        h1 {
+            font-size: 2.2em;
+        }
+        h2 {
+            font-size: 1.3em;
+            border-left: 4px solid #2d6cdf;
+            padding-left: 10px;
+            margin-top: 32px;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        .info {
+            margin-bottom: 24px;
+        }
+        .contact {
+            margin-top: 16px;
+            font-size: 1em;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill {
+            background: #e3eafc;
+            color: #2d6cdf;
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 0.98em;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>李师贤（zxlishixian）</h1>
+            <div class="info">
+                <strong>个人简介：</strong>
+                <p>北京邮电大学未来学院三年级本科生，主修计算机及通信工程，绩点3.58/4，专业排名前1/3。具备扎实的数理基础和编程能力，热衷于人工智能、计算机视觉、深度学习等前沿领域。多次参与校内外创新项目，具备丰富的团队协作与项目实践经验，曾获国家级及校级多项奖项。具备良好的英文文献阅读能力，乐于持续学习与技术分享。</p>
+            </div>
+
+        <h2>教育背景</h2>
+        <ul>
+            <li><strong>北京邮电大学</strong>，未来学院，本科，2022-2026（预计）<br>
+                绩点：3.58/4，专业课成绩87/100，专业排名20/60<br>
+                主要课程：数学分析(90)、高等代数(93)、概率论与随机过程(97)、数据结构与算法、离散数学、信号与系统等（均90+）
+            </li>
+            <li><strong>台湾阳明交通大学</strong>，资讯工程学系，2025年秋季交换生<br>
+                主要课程：编译器设计概论(A)、数据库系统概论(A)、电脑视觉实务与深度学习(A)、深度学习(A)<br>
+                说明：研=大学部修研究所课程，#=英语授课
+            </li>
+        </ul>
+
+        <h2>工作/实习经历</h2>
+        <ul>
+            <li>暂无正式实习经历，已多次参与校内外创新项目，担任项目组长及核心成员，具备丰富的项目开发与团队协作经验。</li>
+        </ul>
+
+        <h2>项目经历</h2>
+        <ul>
+            <li><strong>“岐黄智教”大创项目</strong>（北京中医药大学）<br>
+                核心成员，获北京市“挑战杯”人工智能专项赛道国家三等奖<br>
+                负责项目网站搭建与AI模型接入，推动AI技术在中医教学中的应用，项目成果获国家级奖项。
+            </li>
+            <li><strong>“智创助手”大创项目</strong>（北京邮电大学）<br>
+                核心成员，开发本地化部署的分析工具手册自然语言模型，负责一键化部署与技术封装。
+            </li>
+            <li><strong>小车自动巡航项目</strong>（暑期日本电气通信大学短期交流PBL）<br>
+                项目组组长，获优秀结项证书。基于ROS与Gazebo搭建仿真环境，编写Python节点实现SLAM建图、路径规划与动态避障，完成仿真与实体小车部署。
+            </li>
+            <li><strong>低光照图像增强中的自适应强度坍缩研究</strong>（台湾阳明交通大学AI课程结课设计）<br>
+                复现CVPR论文HVI方法，提出内容感知自适应坍缩策略，提升低光照增强效果，技术报告获好评。
+            </li>
+            <li><strong>“雏雁计划”TrafficFlow项目</strong>（北京邮电大学）<br>
+                核心成员，获校级一等奖。基于深度学习的信号灯时长优化系统，负责技术调研与数据预处理。
+            </li>
+        </ul>
+
+        <h2>技能</h2>
+        <div class="skills">
+            <span class="skill">Python</span>
+            <span class="skill">C/C++</span>
+            <span class="skill">HTML/CSS/JavaScript</span>
+            <span class="skill">Git</span>
+            <span class="skill">Linux</span>
+            <span class="skill">深度学习</span>
+            <span class="skill">计算机视觉</span>
+            <span class="skill">ROS</span>
+            <span class="skill">数据结构与算法</span>
+            <span class="skill">英文文献阅读</span>
+        </div>
+
+        <h2>联系方式</h2>
+        <div class="contact">
+            邮箱：zxlishixian@gmail.com<br>
+            电话：+86-16673588836<br>
+            GitHub：<a href="https://github.com/zxlishixian" target="_blank">zxlishixian</a><br>
+            <!-- 可补充微信、LinkedIn等 -->
+        </div>
+            <h2>获奖与证书</h2>
+            <ul>
+                <li>全国大学生数学竞赛-国家级二等奖</li>
+                <li>北京市“挑战杯”大学生创新创业竞赛-“人工智能+”专项赛道国家级三等奖</li>
+                <li>雏雁计划TrafficFlow项目-校级一等奖</li>
+                <li>北京邮电大学校级二等奖学金（2023-2024、2024-2025学年）</li>
+                <li>英语能力：雅思6.5分，CET-6 538分，CET-4 609分，英文文献阅读能力强</li>
+                <li>小车自动巡航项目优秀结项证书</li>
+                <li>2025秋季台湾地区大学交换生学业全A及以上成绩荣誉证书</li>
+            </ul>
+    </div>
+</body>
+</html>
