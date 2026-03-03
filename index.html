@@ -34,15 +34,7 @@
         .navbar .nav-links a:hover {
             color: #555;
         }
-        .navbar .mode-btn {
-            background: #111;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            padding: 6px 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        /* 夜间模式按钮样式已移除 */
         .container {
             max-width: 900px;
             margin: 40px auto 0 auto;
@@ -84,32 +76,50 @@
         .skills {
             margin-top: 18px;
             margin-bottom: 18px;
+            position: relative;
+            min-height: 600px;
+            height: 600px;
+            background: transparent;
         }
-        .skill-bar {
-            margin-bottom: 10px;
-        }
-        .skill-label {
-            font-weight: bold;
-            margin-bottom: 2px;
-            display: inline-block;
-        }
-        .bar-bg {
-            background: #eaeaea;
-            border-radius: 8px;
-            height: 16px;
-            width: 100%;
-            overflow: hidden;
-        }
-        .bar-fill {
+        .skill-bubble {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: #111;
-            height: 100%;
-            border-radius: 8px;
-            transition: width 0.7s;
+            color: #fff;
+            border-radius: 50%;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+            opacity: 0;
+            transform: scale(0.5);
+            animation: bubbleIn 0.7s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+            margin: 0;
+            word-break: keep-all;
+            text-align: center;
+            padding: 0 8px;
+            line-height: 1.2;
+            overflow: hidden;
+            transition: left 0.5s, top 0.5s;
+        }
+        .skill-bubble span {
+            width: 90%;
+            text-align: center;
+            font-size: 1em;
+            font-weight: inherit;
+            color: inherit;
+            white-space: pre-line;
+            word-break: break-word;
+        }
+        @keyframes bubbleIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            60% { opacity: 1; transform: scale(1.15); }
+            100% { opacity: 1; transform: scale(1); }
         }
         .projects {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px 36px; /* 行间距32px，列间距36px */
             margin-bottom: 24px;
         }
         .project-card {
@@ -117,13 +127,27 @@
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.07);
             padding: 18px 16px;
-            flex: 1 1 260px;
-            min-width: 220px;
-            max-width: 320px;
-            transition: box-shadow 0.2s;
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            transition: box-shadow 0.2s, transform 0.5s, opacity 0.5s;
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            animation: projectPopIn 0.7s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+        }
+        .project-card-title {
+            font-weight: bold;
+            font-size: 1.22em;
+            margin-bottom: 6px;
         }
         .project-card:hover {
             box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+            transform: scale(1.03);
+        }
+        @keyframes projectPopIn {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            60% { opacity: 1; transform: translateY(-8px) scale(1.04); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         .download-btn {
             display: inline-block;
@@ -158,7 +182,7 @@
             background: #111;
             color: #fff;
             border-radius: 50%;
-            width: 44px;
+            width : 44px;
             height: 44px;
             display: flex;
             align-items: center;
@@ -171,7 +195,10 @@
         @media (max-width: 600px) {
             .container { padding: 12px; }
             .navbar { padding: 12px 8px; }
-            .projects { flex-direction: column; }
+            .projects {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
         }
     </style>
 </head>
@@ -184,70 +211,45 @@
             <a href="#projects">项目</a>
             <a href="#contact">联系</a>
         </div>
-        <button class="mode-btn" onclick="toggleMode()">夜间模式</button>
     </div>
     <div class="container">
         <div style="text-align:center;">
             <img class="avatar" src="avatar.jpg" alt="头像" onerror="this.style.display='none'">
             <div class="welcome" id="welcome"></div>
+            <div id="welcome-en" style="font-size:0.95em;color:#888;margin-top:2px;"></div>
         </div>
         <div class="info section" id="info">
-            <h1>李师贤（zxlishixian）</h1>
+            <h1>李师贤</h1>
             <strong>个人简介</strong>
             <p>北京邮电大学未来学院三年级本科生，主修计算机及通信工程，绩点3.58/4，专业排名前1/3。热衷于人工智能、计算机视觉、深度学习等前沿领域。多次参与校内外创新项目，具备丰富的团队协作与项目实践经验，曾获国家级及省部级多项奖项。英文文献阅读能力强，乐于持续学习与技术分享。</p>
         </div>
         <div class="skills section" id="skills">
             <h2>技能</h2>
-            <div class="skill-bar">
-                <span class="skill-label">Python</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <span class="skill-label">C/C++</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <span class="skill-label">HTML/CSS/JavaScript</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:85%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <span class="skill-label">深度学习</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <span class="skill-label">计算机视觉</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <span class="skill-label">Git</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
-            </div>
-            <div class="skill-bar">
-                <span class="skill-label">Linux</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
+            <div id="skill-bubbles">
+                <!-- 气泡由JS动态生成 -->
             </div>
         </div>
         <div class="section" id="projects">
             <h2>项目经历</h2>
             <div class="projects">
-                <div class="project-card">
-                    <div style="font-weight:bold;">“岐黄智教”大创项目</div>
+                <div class="project-card" style="animation-delay:0.1s">
+                    <div class="project-card-title">“岐黄智教”大创项目</div>
                     <div>核心成员，获北京市“挑战杯”人工智能专项赛道国家三等奖。负责项目网站搭建与AI模型接入，推动AI技术在中医教学中的应用。</div>
                 </div>
-                <div class="project-card">
-                    <div style="font-weight:bold;">“智创助手”大创项目</div>
+                <div class="project-card" style="animation-delay:0.25s">
+                    <div class="project-card-title">“智创助手”大创项目</div>
                     <div>核心成员，开发本地化部署的分析工具手册自然语言模型，负责一键化部署与技术封装。</div>
                 </div>
-                <div class="project-card">
-                    <div style="font-weight:bold;">小车自动巡航项目</div>
+                <div class="project-card" style="animation-delay:0.4s">
+                    <div class="project-card-title">小车自动巡航项目</div>
                     <div>项目组组长，获优秀结项证书。基于ROS与Gazebo搭建仿真环境，编写Python节点实现SLAM建图、路径规划与动态避障，完成仿真与实体小车部署。</div>
                 </div>
-                <div class="project-card">
-                    <div style="font-weight:bold;">低光照图像增强中的自适应强度坍缩研究</div>
+                <div class="project-card" style="animation-delay:0.55s">
+                    <div class="project-card-title">低光照图像增强中的自适应强度坍缩研究</div>
                     <div>复现CVPR论文HVI方法，提出内容感知自适应坍缩策略，提升低光照增强效果，技术报告获好评。</div>
                 </div>
-                <div class="project-card">
-                    <div style="font-weight:bold;">“雏雁计划”TrafficFlow项目</div>
+                <div class="project-card" style="animation-delay:0.7s">
+                    <div class="project-card-title">“雏雁计划”TrafficFlow项目</div>
                     <div>核心成员，获校级一等奖。基于深度学习的信号灯时长优化系统，负责技术调研与数据预处理。</div>
                 </div>
             </div>
@@ -266,21 +268,110 @@
     </div>
     <div class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="返回顶部">↑</div>
     <script>
-        // 夜间模式切换
-        function toggleMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-        // 动态欢迎语
-        const welcomeText = '欢迎来到我的主页！';
-        let i = 0;
-        function typeWelcome() {
-            if (i <= welcomeText.length) {
-                document.getElementById('welcome').textContent = welcomeText.slice(0, i);
-                i++;
-                setTimeout(typeWelcome, 80);
+        // 动态欢迎语（中英文）
+        const welcomeTextZh = '欢迎来到我的主页！';
+        const welcomeTextEn = 'Welcome to my homepage!';
+        let iZh = 0, iEn = 0;
+        function typeWelcomeZh() {
+            if (iZh <= welcomeTextZh.length) {
+                document.getElementById('welcome').textContent = welcomeTextZh.slice(0, iZh);
+                iZh++;
+                setTimeout(typeWelcomeZh, 80);
             }
         }
-        typeWelcome();
+        function typeWelcomeEn() {
+            if (iEn <= welcomeTextEn.length) {
+                document.getElementById('welcome-en').textContent = welcomeTextEn.slice(0, iEn);
+                iEn++;
+                setTimeout(typeWelcomeEn, 60);
+            }
+        }
+        typeWelcomeZh();
+        setTimeout(typeWelcomeEn, 800); // 英文欢迎语稍后出现
+
+        // 技能气泡数据与动画
+        const skills = [
+            { name: 'Python', size: 110 },
+            { name: '深度学习', size: 150 },
+            { name: '计算机视觉', size: 200 },
+            { name: 'C/C++', size: 110 },
+            { name: 'Git', size: 90 },
+            { name: 'Linux', size: 90 }
+        ];
+        function renderSkillBubbles() {
+            const skillBubbles = document.getElementById('skill-bubbles');
+            skillBubbles.innerHTML = '';
+            let usedPositions = [];
+            skills.forEach((skill, idx) => {
+                let textLen = skill.name.length;
+                let baseSize = skill.size;
+                let bubbleSize = Math.max(baseSize + 40, 100 + textLen * 18);
+                const bubble = document.createElement('div');
+                bubble.className = 'skill-bubble';
+                bubble.style.width = bubbleSize + 'px';
+                bubble.style.height = bubbleSize + 'px';
+                bubble.style.fontSize = Math.max(13, bubbleSize/4.5) + 'px';
+                bubble.style.animationDelay = (idx * 0.18 + 0.2) + 's';
+                const pos = getRandomPosition(bubbleSize, usedPositions, skillBubbles.offsetWidth || 700);
+                bubble.style.left = pos.left + 'px';
+                bubble.style.top = pos.top + 'px';
+                usedPositions.push({left: pos.left, top: pos.top, size: bubbleSize});
+                const span = document.createElement('span');
+                span.textContent = skill.name;
+                bubble.appendChild(span);
+                skillBubbles.appendChild(bubble);
+            });
+        }
+        function getRandomPosition(size, usedPositions, areaW) {
+            const areaH = 600;
+            let left, top, tries = 0;
+            do {
+                left = Math.random() * (areaW - size - 10) + 5;
+                top = Math.random() * (areaH - size - 10) + 5;
+                var overlap = usedPositions.some(pos => {
+                    const dx = left + size/2 - (pos.left + pos.size/2);
+                    const dy = top + size/2 - (pos.top + pos.size/2);
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    return dist < (size + pos.size)/2;
+                });
+                tries++;
+            } while (overlap && tries < 200);
+            return {left, top};
+        }
+        renderSkillBubbles();
+
+        // 项目卡片动画重置
+        function resetProjectCardsAnimation() {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, idx) => {
+                card.style.animation = 'none';
+                // 强制重绘
+                void card.offsetWidth;
+                card.style.animation = `projectPopIn 0.7s cubic-bezier(.68,-0.55,.27,1.55) forwards`;
+                card.style.animationDelay = (0.1 + idx * 0.15) + 's';
+            });
+        }
+
+        // 修复导航锚点跳转偏移（考虑导航栏高度），并在跳转后重置动画
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var href = link.getAttribute('href');
+                var target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    var navHeight = document.querySelector('.navbar').offsetHeight;
+                    var top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+                    window.scrollTo({top: top, behavior: 'smooth'});
+                    // 动画重置
+                    if(href==='#skills') {
+                        setTimeout(renderSkillBubbles, 350);
+                    }
+                    if(href==='#projects') {
+                        setTimeout(resetProjectCardsAnimation, 350);
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
