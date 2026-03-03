@@ -15,11 +15,10 @@
         /* 个性签名样式 */
         .signature {
             font-family: 'Segoe Script', 'KaiTi', cursive;
-            font-size: 1.15em;
-            color: #444;
-            margin-top: 8px;
-            letter-spacing: 2px;
-            opacity: 0.85;
+            font-size: 1.5em;
+            color: #111;
+            margin-bottom: 12px;
+            letter-spacing: 3px;
         }
         /* 进度环技能区 */
         .skill-ring {
@@ -315,7 +314,6 @@
             <img class="avatar" src="avatar.jpg" alt="头像" onerror="this.style.display='none'">
             <div class="welcome" id="welcome"></div>
             <div id="welcome-en" style="font-size:0.95em;color:#888;margin-top:2px;"></div>
-            <div class="signature">越過群山追斜陽。</div>
         </div>
         <div class="info section" id="info">
             <h1>李师贤</h1>
@@ -408,6 +406,7 @@
             </div>
         </div>
         <div class="footer">
+            <div class="signature">越過群山追斜陽。</div>
             © 2025 zxlishixian. All rights reserved.
         </div>
     </div>
@@ -415,7 +414,7 @@
     <script>
         // 动态欢迎语
         const welcomeTextZh = '你好，欢迎来到我的主页！';
-        const welcomeTextEn = 'Welcome to my homepage!';
+        const welcomeTextEn = 'Hi there, welcome to my homepage!';
         let iZh = 0, iEn = 0;
         function typeWelcomeZh() {
             if (iZh <= welcomeTextZh.length) {
@@ -487,7 +486,7 @@
             const radius = 56;
             const circumference = 2 * Math.PI * radius;
             skills.forEach((skill, idx) => {
-                const randomPercent = Math.floor(Math.random() * 40) + 60; // 60-99随机
+                const randomPercent = Math.floor(Math.random() * 30) + 70; // 70-99随机
                 const targetOffset = circumference * (1 - randomPercent / 100);
                 const ring = document.createElement('div');
                 ring.className = 'skill-ring fade-in';
