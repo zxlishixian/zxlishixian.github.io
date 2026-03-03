@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人简介 - zxlishixian</title>
+    <title>Personal Profile - zxlishixian</title>
     <style>
         html {
             scroll-behavior: smooth;
         }
-        /* 粒子动画背景 */
         #particles-bg {
             position: fixed;
             left: 0; top: 0; width: 100vw; height: 100vh;
             z-index: 0;
             pointer-events: none;
         }
-        /* 个性签名样式 */
         .signature {
             font-family: 'Segoe Script', 'KaiTi', cursive;
             font-size: 1.5em;
@@ -23,7 +21,6 @@
             margin-bottom: 12px;
             letter-spacing: 3px;
         }
-        /* 进度环技能区 */
         .skill-ring {
             display: flex;
             flex-direction: column;
@@ -59,7 +56,6 @@
             align-items: center;
             width: 100%;
         }
-        /* 技能悬浮窗 */
         .skill-tooltip {
             position: absolute;
             left: 50%;
@@ -84,7 +80,6 @@
             opacity: 1;
             visibility: visible;
         }
-        /* 项目翻转卡片 */
         .project-card {
             perspective: 900px;
             background: none;
@@ -135,7 +130,6 @@
             color: #111;
             text-align: center;
         }
-        /* 柔和渐入动画 */
         .fade-in {
             opacity: 0;
             transform: translateY(40px);
@@ -145,7 +139,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* 头像悬停发光放大 */
         .avatar {
             transition: box-shadow 0.3s, transform 0.3s;
         }
@@ -229,7 +222,6 @@
             min-height: 300px;
             background: transparent;
         }
-        /* 简介板块字体放大 */
         #info {
             font-size: 1.15em;
         }
@@ -336,7 +328,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.13);
             z-index: 99;
         }
-        /* 联系方式动画 */
         .contact-item {
             opacity: 0;
             transform: translateX(-30px);
@@ -368,57 +359,57 @@
     <div class="navbar">
         <div class="nav-title">zxlishixian</div>
         <div class="nav-links">
-            <a href="#info">简介</a>
-            <a href="#education">教育</a>
-            <a href="#skills">技能</a>
-            <a href="#projects">项目</a>
-            <a href="#contact">联系</a>
+            <a href="#info">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </div>
     </div>
     <div class="container">
         <div style="text-align:center;">
-            <img class="avatar" src="avatar.jpg" alt="头像" onerror="this.style.display='none'">
+            <img class="avatar" src="avatar.jpg" alt="Avatar" onerror="this.style.display='none'">
             <div class="welcome" id="welcome"></div>
             <div id="welcome-en" style="font-size:0.95em;color:#111;margin-top:2px;"></div>
         </div>
         <div class="info section" id="info">
-            <h1>李师贤</h1>
-            <strong>个人简介</strong>
-            <p>聚焦人工智能与计算机视觉方向，关注“算法研究 + 工程落地”的结合。具备跨团队协作与项目推进经验，持续在竞赛、科研复现和实际项目中打磨技术能力。</p>
+            <h1>Shixian Li</h1>
+            <strong>Profile</strong>
+            <p>Focused on artificial intelligence and computer vision, with strong interest in combining algorithm research with real-world engineering deployment. Experienced in cross-team collaboration and project execution through competitions, research reproductions, and practical development work.</p>
         </div>
         <div class="section" id="education">
-            <h2>教育经历</h2>
+            <h2>Education</h2>
             <div class="education-cards">
                 <div class="education-card fade-in">
-                    <div class="education-card-title">北京邮电大学 | 未来学院</div>
-                    <div class="education-card-meta">计算机及通信工程｜本科（2023 - 至今）</div>
+                    <div class="education-card-title">Beijing University of Posts and Telecommunications | Future College</div>
+                    <div class="education-card-meta">Computer and Communication Engineering | Bachelor's (2023 - Present)</div>
                     <div class="education-card-desc">
                         <ul>
-                            <li>GPA 3.58/4.00，专业课平均 87/100</li>
-                            <li>核心课程：数学分析 90、高等代数 93、概率论与随机过程 97</li>
-                            <li>数据结构与算法、离散数学、信号与系统等课程成绩均为 90+</li>
+                            <li>GPA 3.58/4.00, major-course average 87/100</li>
+                            <li>Core courses: Mathematical Analysis 90, Advanced Algebra 93, Probability and Stochastic Processes 97</li>
+                            <li>Data Structures & Algorithms, Discrete Mathematics, Signals and Systems, and other core courses are all 90+</li>
                         </ul>
                     </div>
                 </div>
                 <div class="education-card fade-in">
-                    <div class="education-card-title">台湾阳明交通大学｜資訊工程學系</div>
-                    <div class="education-card-meta">2025 年秋季交换生</div>
+                    <div class="education-card-title">National Yang Ming Chiao Tung University | Department of Computer Science</div>
+                    <div class="education-card-meta">Exchange Student, Fall 2025</div>
                     <div class="education-card-desc">
                         <div class="exchange-scores">
                             <div class="exchange-score-row">
-                                <div class="exchange-course">編譯器設計概論（3.00）</div>
+                                <div class="exchange-course">Introduction to Compiler Design (3.00)</div>
                                 <div class="exchange-grade">A</div>
                             </div>
                             <div class="exchange-score-row">
-                                <div class="exchange-course">資料庫系統概論（3.00，英語授課）</div>
+                                <div class="exchange-course">Introduction to Database Systems (3.00, English-taught)</div>
                                 <div class="exchange-grade">A</div>
                             </div>
                             <div class="exchange-score-row">
-                                <div class="exchange-course">電腦視覺實務與深度學習（3.00）</div>
+                                <div class="exchange-course">Computer Vision Practice and Deep Learning (3.00)</div>
                                 <div class="exchange-grade">A</div>
                             </div>
                             <div class="exchange-score-row">
-                                <div class="exchange-course">深度學習（3.00）</div>
+                                <div class="exchange-course">Deep Learning (3.00)</div>
                                 <div class="exchange-grade">A</div>
                             </div>
                         </div>
@@ -427,73 +418,72 @@
             </div>
         </div>
         <div class="skills section" id="skills">
-            <h2>技能</h2>
+            <h2>Skills</h2>
             <div id="skill-rings">
-                <!-- 进度环由JS动态生成 -->
             </div>
         </div>
         <div class="section" id="projects">
-            <h2>项目经历</h2>
+            <h2>Project Experience</h2>
             <div class="projects">
                 <div class="project-card fade-in">
                     <div class="project-flip">
                         <div class="project-front">
-                            <div class="project-card-title">北京中医药大学“岐黄智教”大创项目</div>
+                            <div class="project-card-title">"Qihuang Smart Education" Innovation Project, BUCM</div>
                         </div>
                         <div class="project-back">
-                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
-                            <div style="color:#111;text-align:center;max-width:90%;">核心成员，获北京市“挑战杯”人工智能专项赛道国家三等奖。项目聚焦AI解决中医教学难点，负责项目网站搭建与模型接入。</div>
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">Project Summary</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">Core team member; won National Third Prize in the Beijing "Challenge Cup" AI special track. Focused on AI-enabled TCM education, responsible for website development and model integration.</div>
                         </div>
                     </div>
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-flip">
                         <div class="project-front">
-                            <div class="project-card-title">北京邮电大学“智创助手”大创项目</div>
+                            <div class="project-card-title">"Zhichuang Assistant" Innovation Project, BUPT</div>
                         </div>
                         <div class="project-back">
-                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
-                            <div style="color:#111;text-align:center;max-width:90%;">核心成员，开发可本地化部署的分析工具使用手册自然语言模型，负责本地一键化部署与封装等技术研究。</div>
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">Project Summary</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">Core team member; developed an on-premises manual-oriented NLP model for analytics tools, and worked on one-click local deployment and technical packaging.</div>
                         </div>
                     </div>
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-flip">
                         <div class="project-front">
-                            <div class="project-card-title">暑期日本电气通信大学短期交流PBL</div>
+                            <div class="project-card-title">Short-term PBL Exchange at UEC Japan (Summer)</div>
                         </div>
                         <div class="project-back">
-                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
-                            <div style="color:#111;text-align:center;max-width:90%;">小车自动巡航项目组组长，获得优秀结项证书。基于ROS与Gazebo搭建仿真环境，编写Python节点实现SLAM建图、路径规划与动态避障。</div>
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">Project Summary</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">Team lead of autonomous cruising vehicle project; awarded Outstanding Completion. Built simulation with ROS and Gazebo, and implemented SLAM, path planning, and dynamic obstacle avoidance in Python nodes.</div>
                         </div>
                     </div>
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-flip">
                         <div class="project-front">
-                            <div class="project-card-title">低光照图像增强中的自适应强度坍缩研究</div>
+                            <div class="project-card-title">Adaptive Intensity Collapse for Low-Light Image Enhancement</div>
                         </div>
                         <div class="project-back">
-                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
-                            <div style="color:#111;text-align:center;max-width:90%;">复现CVPR论文HVI方法，提出内容感知自适应坍缩策略，提升低光照增强效果，技术报告获好评。</div>
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">Project Summary</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">Reproduced the CVPR HVI method and proposed a content-aware adaptive collapse strategy to improve low-light enhancement performance. Technical report received strong feedback.</div>
                         </div>
                     </div>
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-flip">
                         <div class="project-front">
-                            <div class="project-card-title">"雏雁计划"TrafficFlow项目</div>
+                            <div class="project-card-title">"Young Geese Program" TrafficFlow Project</div>
                         </div>
                         <div class="project-back">
-                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
-                            <div style="color:#111;text-align:center;max-width:90%;">核心成员，获校级一等奖。基于深度学习的信号灯时长优化系统，负责技术调研与数据预处理。</div>
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">Project Summary</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">Core team member; won campus-level First Prize. Built a deep-learning-based traffic signal duration optimization system, responsible for technical research and data preprocessing.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="section" id="contact">
-            <h2>联系方式</h2>
+            <h2>Contact</h2>
             <div style="text-align:left;">
                 <p class="contact-item" style="display:flex;align-items:center;gap:10px;font-size:1.15em;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -504,12 +494,12 @@
                     <a href="https://github.com/zxlishixian" target="_blank" style="color:#111;font-size:1.1em;">github.com/zxlishixian</a>
                 </p>
                 <div class="contact-item">
-                    <img class="qr" src="qr.png" alt="微信二维码" onerror="this.style.display='none'">
+                    <img class="qr" src="qr.png" alt="WeChat QR" onerror="this.style.display='none'">
                 </div>
                 <div class="contact-item">
-                    <a class="download-btn" href="resume.pdf" download>下载简历</a>
+                    <a class="download-btn" href="resume.pdf" download>Download Resume</a>
                 </div>
-                <div class="contact-item signature" style="text-align:center;width:100%;margin-top:100px;">越過群山追斜陽。</div>
+                <div class="contact-item signature" style="text-align:center;width:100%;margin-top:100px;">Crossing mountains to chase the setting sun.</div>
             </div>
         </div>
         <div class="footer">
@@ -518,9 +508,7 @@
     </div>
     <div class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
     <script>
-        // 动态欢迎语
-        const welcomeTextZh = '你好，欢迎来到我的主页！';
-        const welcomeTextEn = 'Hi there, welcome to my homepage!';
+        const welcomeTextZh = 'Hi there , welcome to my homepage!';
         let iZh = 0, iEn = 0;
         function typeWelcomeZh() {
             if (iZh <= welcomeTextZh.length) {
@@ -539,7 +527,6 @@
         typeWelcomeZh();
         setTimeout(typeWelcomeEn, 800);
 
-        // 简约粒子动画
         function drawParticles() {
             const canvas = document.getElementById('particles-bg');
             const ctx = canvas.getContext('2d');
@@ -577,23 +564,22 @@
         }
         drawParticles();
 
-        // 技能进度环+弹窗
         const skills = [
-            { name: 'Python', desc: '熟练掌握Python编程，数据分析、AI开发、自动化脚本等应用丰富。' },
-            { name: '深度学习', desc: '熟悉主流深度学习框架，具备模型训练、调优与部署经验。' },
-            { name: '计算机视觉', desc: '掌握图像处理、目标检测、分割等CV技术，参与相关项目实践。' },
-            { name: 'C/C++', desc: '具备C/C++开发能力，参与嵌入式与算法项目。' },
-            { name: 'Git', desc: '熟悉Git版本管理，团队协作与项目管理经验丰富。' },
-            { name: 'Linux', desc: '熟悉Linux系统操作，服务器部署与开发环境搭建。' }
+            { name: 'Python', desc: 'Proficient in Python for data analysis, AI development, and automation scripting.' },
+            { name: 'Deep Learning', desc: 'Familiar with mainstream deep-learning frameworks, including training, tuning, and deployment.' },
+            { name: 'Computer Vision', desc: 'Experienced in image processing, object detection, and segmentation through practical projects.' },
+            { name: 'C/C++', desc: 'Capable of C/C++ development in embedded and algorithm-related projects.' },
+            { name: 'Git', desc: 'Skilled in Git-based version control, team collaboration, and project workflow management.' },
+            { name: 'Linux', desc: 'Comfortable with Linux operations, server deployment, and development environment setup.' }
         ];
         function renderSkillRings() {
             const skillRings = document.getElementById('skill-rings');
             skillRings.innerHTML = '';
             const radius = 56;
             const circumference = 2 * Math.PI * radius;
-            const durations = [0.75, 1.8, 0.8, 1.0, 1.3, 1.5]; // 每个进度圈的加载时长
+            const durations = [0.75, 1.8, 0.8, 1.0, 1.3, 1.5];
             skills.forEach((skill, idx) => {
-                const targetOffset = 0; // 100%加载满
+                const targetOffset = 0;
                 const duration = durations[idx] || 1.2;
                 const ring = document.createElement('div');
                 ring.className = 'skill-ring fade-in';
@@ -601,9 +587,9 @@
                 ring.innerHTML = `
                     <svg width="140" height="140">
                         <circle cx="70" cy="70" r="${radius}" stroke="#c6dbf5" stroke-width="10" fill="none"/>
-                        <circle class="progress-circle" cx="70" cy="70" r="${radius}" stroke="#0c4d9b" stroke-width="10" fill="none" 
-                            stroke-dasharray="${circumference}" 
-                            stroke-dashoffset="${circumference}" 
+                        <circle class="progress-circle" cx="70" cy="70" r="${radius}" stroke="#0c4d9b" stroke-width="10" fill="none"
+                            stroke-dasharray="${circumference}"
+                            stroke-dashoffset="${circumference}"
                             style="transition:stroke-dashoffset ${duration}s ease-out; transform: rotate(-90deg); transform-origin: center;"
                             data-target="${targetOffset}"/>
                     </svg>
@@ -624,7 +610,6 @@
         }
         renderSkillRings();
 
-        // 项目卡片柔和渐入
         function fadeInOnScroll() {
             const els = document.querySelectorAll('.fade-in');
             function check(){
@@ -639,7 +624,6 @@
         }
         fadeInOnScroll();
 
-        // 导航点击重新播放动画
         function replayAnimation(sectionId) {
             if(sectionId === 'skills') {
                 renderSkillRings();
@@ -648,7 +632,7 @@
                 cards.forEach((card, idx) => {
                     card.classList.remove('visible');
                     card.style.animation = 'none';
-                    card.offsetHeight; // 触发重排
+                    card.offsetHeight;
                     card.style.animation = '';
                     setTimeout(() => card.classList.add('visible'), 100 + idx * 100);
                 });
