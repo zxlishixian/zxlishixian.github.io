@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简介 - zxlishixian</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        /* 粒子动画背景 */
+        #particles-bg {
+            position: fixed;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* 个性签名样式 */
+        .signature {
+            font-family: 'Segoe Script', 'KaiTi', cursive;
+            font-size: 1.5em;
+            color: #111;
+            margin-bottom: 12px;
+            letter-spacing: 3px;
+        }
+        /* 进度环技能区 */
+        .skill-ring {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 18px 0 18px 0;
+            position: relative;
+            width: 140px; height: 140px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        .skill-ring:hover {
+            transform: scale(1.15) !important;
+            z-index: 99999;
+        }
+        .skill-ring svg {
+            position: absolute; left: 0; top: 0;
+        }
+        .skill-ring-label {
+            position: absolute; left: 0; top: 50%; width: 100%; text-align: center;
+            transform: translateY(-50%);
+            font-weight: bold;
+            font-size: 1em;
+            color: #111;
+        }
+        #skill-rings {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0 0;
+            justify-items: center;
+            align-items: center;
+            width: 100%;
+        }
+        /* 技能悬浮窗 */
+        .skill-tooltip {
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+            padding: 14px 18px;
+            z-index: 9999;
+            min-width: 200px;
+            max-width: 280px;
+            font-size: 1em;
+            color: #111;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            pointer-events: none;
+            margin-top: 10px;
+        }
+        .skill-ring:hover .skill-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* 项目翻转卡片 */
+        .project-card {
+            perspective: 900px;
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            min-height: 180px;
+            height: 180px;
+        }
+        .project-flip {
+            width: 100%; height: 100%;
+            position: relative;
+            transition: transform 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+            transform-style: preserve-3d;
+        }
+        .project-card:hover .project-flip {
+            transform: rotateY(180deg);
+        }
+        .project-front, .project-back {
+            position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+            background: #fff;
+            padding: 18px 16px;
+            box-sizing: border-box;
+            backface-visibility: hidden;
+            color: #111;
+        }
+        .project-front {
+            z-index: 2;
+            border: 1px solid #c6dbf5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .project-back {
+            transform: rotateY(180deg);
+            z-index: 1;
+            border: 1px solid #c6dbf5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .project-card-title {
+            font-weight: bold;
+            font-size: 1.22em;
+            margin-bottom: 6px;
+            color: #111;
+            text-align: center;
+        }
+        /* 柔和渐入动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s, transform 0.7s;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 头像悬停发光放大 */
+        .avatar {
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .avatar:hover {
+            box-shadow: 0 0 24px #7fb0e8;
+            transform: scale(1.08);
+        }
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            background: #f4f8ff;
+            color: #111;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background: #eaf2ff;
+            border-bottom: 1px solid #c6dbf5;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .navbar .nav-links a {
+            margin: 0 18px;
+            text-decoration: none;
+            color: #111;
+            font-weight: bold;
+            font-size: 1.08em;
+            transition: color 0.2s;
+        }
+        .navbar .nav-links a:hover {
+            color: #111;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(12,77,155,0.2);
+            padding: 40px 32px 32px 32px;
+            position: relative;
+            z-index: 1;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0c4d9b;
+            margin-bottom: 18px;
+        }
+        .welcome {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        h1 {
+            color: #111;
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: #111;
+            font-size: 1.15em;
+            font-weight: bold;
+            border-left: 4px solid #0c4d9b;
+            padding-left: 12px;
+            margin-top: 36px;
+            margin-bottom: 12px;
+        }
+        .skills {
+            margin-top: 18px;
+            margin-bottom: 18px;
+            position: relative;
+            min-height: 300px;
+            background: transparent;
+        }
+        /* 简介板块字体放大 */
+        #info {
+            font-size: 1.15em;
+        }
+        #info h1 {
+            font-size: 2.4em;
+        }
+        .education-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 8px;
+        }
+        .education-card {
+            background: #fff;
+            border: 1px solid #c6dbf5;
+            border-radius: 12px;
+            padding: 16px 18px;
+            box-shadow: 0 2px 10px rgba(12,77,155,0.1);
+        }
+        .education-card-title {
+            font-size: 1.05em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .education-card-meta {
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+        .education-card-desc {
+            line-height: 1.6;
+        }
+        .education-card ul {
+            margin: 8px 0 0 18px;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .education-card li {
+            margin-bottom: 4px;
+        }
+        .exchange-scores {
+            margin-top: 6px;
+        }
+        .exchange-score-row {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 8px;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+        .exchange-type {
+            font-weight: bold;
+            color: #111;
+            min-width: 20px;
+        }
+        .exchange-course {
+            text-align: left;
+        }
+        .exchange-credit {
+            text-align: right;
+            color: #555;
+        }
+        .exchange-grade {
+            text-align: right;
+            font-weight: bold;
+            min-width: 24px;
+        }
+        .exchange-note {
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #666;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px 36px;
+            margin-bottom: 24px;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #0c4d9b;
+            color: #fff;
+            border-radius: 6px;
+            padding: 8px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 18px;
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: #083b78;
+        }
+        .qr {
+            margin-top: 12px;
+            width: 120px;
+            height: 120px;
+        }
+        .footer {
+            text-align: center;
+            color: #111;
+            font-size: 0.95em;
+            margin-top: 40px;
+            padding-bottom: 18px;
+        }
+        .back-top {
+            position: fixed;
+            right: 32px;
+            bottom: 32px;
+            background: #0c4d9b;
+            color: #fff;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+            z-index: 99;
+        }
+        /* 联系方式动画 */
+        .contact-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: contactSlideIn 0.6s ease forwards;
+        }
+        .contact-item:nth-child(1) { animation-delay: 0.1s; }
+        .contact-item:nth-child(2) { animation-delay: 0.25s; }
+        .contact-item:nth-child(3) { animation-delay: 0.4s; }
+        .contact-item:nth-child(4) { animation-delay: 0.55s; }
+        .contact-item:nth-child(5) { animation-delay: 0.7s; }
+        @keyframes contactSlideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 12px; }
+            .navbar { padding: 12px 8px; }
+            .education-cards {
+                grid-template-columns: 1fr;
+            }
+            .projects {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-bg"></canvas>
+    <div class="navbar">
+        <div class="nav-title">zxlishixian</div>
+        <div class="nav-links">
+            <a href="#info">简介</a>
+            <a href="#education">教育</a>
+            <a href="#skills">技能</a>
+            <a href="#projects">项目</a>
+            <a href="#contact">联系</a>
+        </div>
+    </div>
+    <div class="container">
+        <div style="text-align:center;">
+            <img class="avatar" src="avatar.jpg" alt="头像" onerror="this.style.display='none'">
+            <div class="welcome" id="welcome"></div>
+            <div id="welcome-en" style="font-size:0.95em;color:#111;margin-top:2px;"></div>
+        </div>
+        <div class="info section" id="info">
+            <h1>李师贤</h1>
+            <strong>个人简介</strong>
+            <p>聚焦人工智能与计算机视觉方向，关注“算法研究 + 工程落地”的结合。具备跨团队协作与项目推进经验，持续在竞赛、科研复现和实际项目中打磨技术能力。</p>
+        </div>
+        <div class="section" id="education">
+            <h2>教育经历</h2>
+            <div class="education-cards">
+                <div class="education-card fade-in">
+                    <div class="education-card-title">北京邮电大学 | 未来学院</div>
+                    <div class="education-card-meta">计算机及通信工程｜本科（2023 - 至今）</div>
+                    <div class="education-card-desc">
+                        <ul>
+                            <li>GPA 3.58/4.00，专业课平均 87/100</li>
+                            <li>核心课程：数学分析 90、高等代数 93、概率论与随机过程 97</li>
+                            <li>数据结构与算法、离散数学、信号与系统等课程成绩均为 90+</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="education-card fade-in">
+                    <div class="education-card-title">國立陽明交通大學｜資訊工程學系</div>
+                    <div class="education-card-meta">2025 年秋季交换生</div>
+                    <div class="education-card-desc">
+                        <div class="exchange-scores">
+                            <div class="exchange-score-row">
+                                <div class="exchange-type">選</div>
+                                <div class="exchange-course">編譯器設計概論</div>
+                                <div class="exchange-credit">3.00</div>
+                                <div class="exchange-grade">A</div>
+                            </div>
+                            <div class="exchange-score-row">
+                                <div class="exchange-type">選</div>
+                                <div class="exchange-course">資料庫系統概論<sup>#</sup></div>
+                                <div class="exchange-credit">3.00</div>
+                                <div class="exchange-grade">A</div>
+                            </div>
+                            <div class="exchange-score-row">
+                                <div class="exchange-type">研</div>
+                                <div class="exchange-course">電腦視覺實務與深度學習</div>
+                                <div class="exchange-credit">3.00</div>
+                                <div class="exchange-grade">A</div>
+                            </div>
+                            <div class="exchange-score-row">
+                                <div class="exchange-type">研</div>
+                                <div class="exchange-course">深度學習</div>
+                                <div class="exchange-credit">3.00</div>
+                                <div class="exchange-grade">A</div>
+                            </div>
+                            <div class="exchange-note">說明：研：大學部修研究所課程；<sup>#</sup>：英語授課</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="skills section" id="skills">
+            <h2>技能</h2>
+            <div id="skill-rings">
+                <!-- 进度环由JS动态生成 -->
+            </div>
+        </div>
+        <div class="section" id="projects">
+            <h2>项目经历</h2>
+            <div class="projects">
+                <div class="project-card fade-in">
+                    <div class="project-flip">
+                        <div class="project-front">
+                            <div class="project-card-title">北京中医药大学“岐黄智教”大创项目</div>
+                        </div>
+                        <div class="project-back">
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">核心成员，获北京市“挑战杯”人工智能专项赛道国家三等奖。项目聚焦AI解决中医教学难点，负责项目网站搭建与模型接入。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-flip">
+                        <div class="project-front">
+                            <div class="project-card-title">北京邮电大学“智创助手”大创项目</div>
+                        </div>
+                        <div class="project-back">
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">核心成员，开发可本地化部署的分析工具使用手册自然语言模型，负责本地一键化部署与封装等技术研究。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-flip">
+                        <div class="project-front">
+                            <div class="project-card-title">暑期日本电气通信大学短期交流PBL</div>
+                        </div>
+                        <div class="project-back">
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">小车自动巡航项目组组长，获得优秀结项证书。基于ROS与Gazebo搭建仿真环境，编写Python节点实现SLAM建图、路径规划与动态避障。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-flip">
+                        <div class="project-front">
+                            <div class="project-card-title">低光照图像增强中的自适应强度坍缩研究</div>
+                        </div>
+                        <div class="project-back">
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">复现CVPR论文HVI方法，提出内容感知自适应坍缩策略，提升低光照增强效果，技术报告获好评。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-flip">
+                        <div class="project-front">
+                            <div class="project-card-title">"雏雁计划"TrafficFlow项目</div>
+                        </div>
+                        <div class="project-back">
+                            <div style="font-weight:bold;color:#111;margin-bottom:8px;">项目内容</div>
+                            <div style="color:#111;text-align:center;max-width:90%;">核心成员，获校级一等奖。基于深度学习的信号灯时长优化系统，负责技术调研与数据预处理。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="contact">
+            <h2>联系方式</h2>
+            <div style="text-align:left;">
+                <p class="contact-item" style="display:flex;align-items:center;gap:10px;font-size:1.15em;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <a href="mailto:zxlishixian@gmail.com" style="color:#111;font-size:1.1em;">zxlishixian@gmail.com</a>
+                </p>
+                <p class="contact-item" style="display:flex;align-items:center;gap:10px;font-size:1.15em;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="#111"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <a href="https://github.com/zxlishixian" target="_blank" style="color:#111;font-size:1.1em;">github.com/zxlishixian</a>
+                </p>
+                <div class="contact-item">
+                    <img class="qr" src="qr.png" alt="微信二维码" onerror="this.style.display='none'">
+                </div>
+                <div class="contact-item">
+                    <a class="download-btn" href="resume.pdf" download>下载简历</a>
+                </div>
+                <div class="contact-item signature" style="text-align:center;width:100%;margin-top:100px;">越過群山追斜陽。</div>
+            </div>
+        </div>
+        <div class="footer">
+            © 2025 zxlishixian. All rights reserved.
+        </div>
+    </div>
+    <div class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+    <script>
+        // 动态欢迎语
+        const welcomeTextZh = '你好，欢迎来到我的主页！';
+        const welcomeTextEn = 'Hi there, welcome to my homepage!';
+        let iZh = 0, iEn = 0;
+        function typeWelcomeZh() {
+            if (iZh <= welcomeTextZh.length) {
+                document.getElementById('welcome').textContent = welcomeTextZh.slice(0, iZh);
+                iZh++;
+                setTimeout(typeWelcomeZh, 80);
+            }
+        }
+        function typeWelcomeEn() {
+            if (iEn <= welcomeTextEn.length) {
+                document.getElementById('welcome-en').textContent = welcomeTextEn.slice(0, iEn);
+                iEn++;
+                setTimeout(typeWelcomeEn, 60);
+            }
+        }
+        typeWelcomeZh();
+        setTimeout(typeWelcomeEn, 800);
+
+        // 简约粒子动画
+        function drawParticles() {
+            const canvas = document.getElementById('particles-bg');
+            const ctx = canvas.getContext('2d');
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+            let particles = [];
+            for(let i=0;i<38;i++){
+                particles.push({
+                    x: Math.random()*canvas.width,
+                    y: Math.random()*canvas.height,
+                    r: Math.random()*2+1.5,
+                    dx: (Math.random()-0.5)*0.5,
+                    dy: (Math.random()-0.5)*0.5,
+                    c: `rgba(12,77,155,${Math.random()*0.5+0.3})`
+                });
+            }
+            function animate(){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                for(let p of particles){
+                    ctx.beginPath();
+                    ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
+                    ctx.fillStyle=p.c;
+                    ctx.fill();
+                    p.x+=p.dx;p.y+=p.dy;
+                    if(p.x<0||p.x>canvas.width)p.dx*=-1;
+                    if(p.y<0||p.y>canvas.height)p.dy*=-1;
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+        drawParticles();
+
+        // 技能进度环+弹窗
+        const skills = [
+            { name: 'Python', desc: '熟练掌握Python编程，数据分析、AI开发、自动化脚本等应用丰富。' },
+            { name: '深度学习', desc: '熟悉主流深度学习框架，具备模型训练、调优与部署经验。' },
+            { name: '计算机视觉', desc: '掌握图像处理、目标检测、分割等CV技术，参与相关项目实践。' },
+            { name: 'C/C++', desc: '具备C/C++开发能力，参与嵌入式与算法项目。' },
+            { name: 'Git', desc: '熟悉Git版本管理，团队协作与项目管理经验丰富。' },
+            { name: 'Linux', desc: '熟悉Linux系统操作，服务器部署与开发环境搭建。' }
+        ];
+        function renderSkillRings() {
+            const skillRings = document.getElementById('skill-rings');
+            skillRings.innerHTML = '';
+            const radius = 56;
+            const circumference = 2 * Math.PI * radius;
+            const durations = [0.75, 1.8, 0.8, 1.0, 1.3, 1.5]; // 每个进度圈的加载时长
+            skills.forEach((skill, idx) => {
+                const targetOffset = 0; // 100%加载满
+                const duration = durations[idx] || 1.2;
+                const ring = document.createElement('div');
+                ring.className = 'skill-ring fade-in';
+                ring.style.transitionDelay = (0.1+idx*0.12)+'s';
+                ring.innerHTML = `
+                    <svg width="140" height="140">
+                        <circle cx="70" cy="70" r="${radius}" stroke="#c6dbf5" stroke-width="10" fill="none"/>
+                        <circle class="progress-circle" cx="70" cy="70" r="${radius}" stroke="#0c4d9b" stroke-width="10" fill="none" 
+                            stroke-dasharray="${circumference}" 
+                            stroke-dashoffset="${circumference}" 
+                            style="transition:stroke-dashoffset ${duration}s ease-out; transform: rotate(-90deg); transform-origin: center;"
+                            data-target="${targetOffset}"/>
+                    </svg>
+                    <div class="skill-ring-label">${skill.name}</div>
+                    <div class="skill-tooltip">
+                        <div style="font-weight:bold;color:#111;margin-bottom:6px;">${skill.name}</div>
+                        <div style="color:#111;font-size:0.95em;">${skill.desc}</div>
+                    </div>
+                `;
+                skillRings.appendChild(ring);
+            });
+            setTimeout(()=>{
+                document.querySelectorAll('.skill-ring').forEach(e=>e.classList.add('visible'));
+                document.querySelectorAll('.progress-circle').forEach(circle => {
+                    circle.style.strokeDashoffset = circle.dataset.target;
+                });
+            },300);
+        }
+        renderSkillRings();
+
+        // 项目卡片柔和渐入
+        function fadeInOnScroll() {
+            const els = document.querySelectorAll('.fade-in');
+            function check(){
+                const wh = window.innerHeight;
+                els.forEach(el=>{
+                    const rect = el.getBoundingClientRect();
+                    if(rect.top<wh-60)el.classList.add('visible');
+                });
+            }
+            window.addEventListener('scroll',check);
+            check();
+        }
+        fadeInOnScroll();
+
+        // 导航点击重新播放动画
+        function replayAnimation(sectionId) {
+            if(sectionId === 'skills') {
+                renderSkillRings();
+            } else if(sectionId === 'projects') {
+                const cards = document.querySelectorAll('#projects .project-card');
+                cards.forEach((card, idx) => {
+                    card.classList.remove('visible');
+                    card.style.animation = 'none';
+                    card.offsetHeight; // 触发重排
+                    card.style.animation = '';
+                    setTimeout(() => card.classList.add('visible'), 100 + idx * 100);
+                });
+            } else if(sectionId === 'contact') {
+                const items = document.querySelectorAll('#contact .contact-item');
+                items.forEach((item, idx) => {
+                    item.style.animation = 'none';
+                    item.offsetHeight;
+                    item.style.animation = '';
+                });
+            }
+        }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if(href === '#skills' || href === '#projects' || href === '#contact') {
+                    setTimeout(() => replayAnimation(href.slice(1)), 100);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
