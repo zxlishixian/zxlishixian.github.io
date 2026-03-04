@@ -274,18 +274,32 @@
         }
         .exchange-score-row {
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 12px;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 8px;
             align-items: baseline;
             margin-bottom: 6px;
+        }
+        .exchange-type {
+            font-weight: bold;
+            color: #111;
+            min-width: 20px;
         }
         .exchange-course {
             text-align: left;
         }
+        .exchange-credit {
+            text-align: right;
+            color: #555;
+        }
         .exchange-grade {
             text-align: right;
             font-weight: bold;
-            min-width: 72px;
+            min-width: 24px;
+        }
+        .exchange-note {
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #666;
         }
         .projects {
             display: grid;
@@ -401,26 +415,35 @@
                     </div>
                 </div>
                 <div class="education-card fade-in">
-                    <div class="education-card-title">國立交通大學｜資訊工程學系</div>
+                    <div class="education-card-title">國立陽明交通大學｜資訊工程學系</div>
                     <div class="education-card-meta">2025 年秋季交换生</div>
                     <div class="education-card-desc">
                         <div class="exchange-scores">
                             <div class="exchange-score-row">
-                                <div class="exchange-course">編譯器設計概論（3.00）</div>
+                                <div class="exchange-type">選</div>
+                                <div class="exchange-course">編譯器設計概論</div>
+                                <div class="exchange-credit">3.00</div>
                                 <div class="exchange-grade">A</div>
                             </div>
                             <div class="exchange-score-row">
-                                <div class="exchange-course">資料庫系統概論（3.00，英語授課）</div>
+                                <div class="exchange-type">選</div>
+                                <div class="exchange-course">資料庫系統概論<sup>#</sup></div>
+                                <div class="exchange-credit">3.00</div>
                                 <div class="exchange-grade">A</div>
                             </div>
                             <div class="exchange-score-row">
-                                <div class="exchange-course">電腦視覺實務與深度學習（3.00）</div>
+                                <div class="exchange-type">研</div>
+                                <div class="exchange-course">電腦視覺實務與深度學習</div>
+                                <div class="exchange-credit">3.00</div>
                                 <div class="exchange-grade">A</div>
                             </div>
                             <div class="exchange-score-row">
-                                <div class="exchange-course">深度學習（3.00）</div>
+                                <div class="exchange-type">研</div>
+                                <div class="exchange-course">深度學習</div>
+                                <div class="exchange-credit">3.00</div>
                                 <div class="exchange-grade">A</div>
                             </div>
+                            <div class="exchange-note">說明：研：大學部修研究所課程；<sup>#</sup>：英語授課</div>
                         </div>
                     </div>
                 </div>
